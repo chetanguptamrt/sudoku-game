@@ -4,7 +4,7 @@ import Box from './Box'
 const Beginner = () => {
   return (
     <div>
-      <Box level={'BEGINNER'} />
+      <Box level={'BEGINNER'} warningLabelShow={true} />
     </div>
   )
 }
