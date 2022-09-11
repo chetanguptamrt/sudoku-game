@@ -57,6 +57,10 @@
     padding: 1% 3.2%;
 }
 
+.box-item-solution {
+    color: green;
+}
+
 .selected-box {
     border-color: #1CD6CE;
 }
@@ -64,7 +68,7 @@
 .number-container {
     display: flex;
     flex-wrap: wrap;
-    width: 400px;
+    max-width: 400px;
     margin: 12px auto;
 }
 
@@ -121,3 +125,12 @@
     transform: rotate(45deg);
 }
 
+.modal .modal-header{
+    background-color: #183042;
+    color: antiquewhite;
+    border-color: #1B1B2F;
+}
+
+.modal .modal-body{
+    background-color: #183042;
+}

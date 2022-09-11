@@ -11,7 +11,7 @@ class GenerateSudoku {
                 this.K = 40 // number of missing digits
                 break;
             case 'ADVANCED':
-                this.K = 50 // number of missing digits
+                this.K = 60 // number of missing digits
                 break;
             default:
                 this.K = 20 // number of missing digits

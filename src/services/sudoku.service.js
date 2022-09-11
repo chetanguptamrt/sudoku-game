@@ -55,9 +55,9 @@ class SudokuSolver {
             this.setInitialValues();
         }
 
-        if (i == this.N - 1 && j == this.N)
+        if (i === this.N - 1 && j === this.N)
             return true;
-        if (j == this.N) {
+        if (j === this.N) {
             j = 0;
             i++;
         }
