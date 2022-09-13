@@ -19,13 +19,20 @@ const Box = ({ level, warningLabelShow }) => {
     const [showWarnings, setShowWarnings] = useState(warningLabelShow);
 
     // add window event
-    // useEffect(() => {
-    //     window.addEventListener("keydown", keyPressHandler);
+    useEffect(() => {
+        window.addEventListener("keydown", keyPressHandler);
 
-    //     return () => {
-    //         window.removeEventListener("keydown", keyPressHandler, false);
-    //     }
-    // }, []);
+        return () => {
+            window.removeEventListener("keydown", keyPressHandler, false);
+        }
+    }, [selectedX, selectedY, mat, boxColor, showModal, boxNumberColor, startingMatrix]);
+
+    const keyPressHandler = ({ key }) => {
+        if (['1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(key)) {
+            numberClickHandler(parseInt(key));
+        }
+    }
+
 
     useEffect(() => {
         const mat = new GenerateSudoku(level).generate();
@@ -50,8 +57,19 @@ const Box = ({ level, warningLabelShow }) => {
         setMat(temp);
 
         // box color
-        const check = checkIfSafe(mat, selectedX, selectedY, key);
         let boxColor = JSON.parse(JSON.stringify(boxNumberColor));
+        // check old field warnings
+        boxColor.forEach((m, i) => {
+            m.forEach((n, j) => {
+                if (n === 'text-danger' && selectedX !== i && selectedY !== j) {
+                    const tempCheck = JSON.parse(JSON.stringify(temp));
+                    tempCheck[i][j] = 0;
+                    const check = checkIfSafe(tempCheck, i, j, temp[i][j]);
+                    if (check) boxColor[i][j] = 'text-white';
+                }
+            });
+        })
+        const check = checkIfSafe(mat, selectedX, selectedY, key);
         boxColor[selectedX][selectedY] = check ? 'text-white' : 'text-danger';
         setBoxNumberColor(boxColor)
 
@@ -65,6 +83,7 @@ const Box = ({ level, warningLabelShow }) => {
                             conMat[i][j] = 0;
                             const isSafe = checkIfSafe(conMat, i, j, n);
                             if (!isSafe) isWin = false;
+                            console.log(isSafe, i, j)
                         }
                     })
                 })
